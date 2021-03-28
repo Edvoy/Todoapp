@@ -6,7 +6,13 @@ https://docs.djangoproject.com/fr/3.1/topics/http/urls/
 https://docs.djangoproject.com/fr/3.1/ref/urls/
 '''
 
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
+from todo import views
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 from . import views
 
@@ -19,4 +25,6 @@ urlpatterns = [
     path('/updateTask/<int:id>', views.updateTask, name="Update Task"),
     path('/deleteAllCompleted', views.deleteAllCompleted, name="Delete all Completed"),
     path('/deleteAll', views.deleteAll, name="Delete All"),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
