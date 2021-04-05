@@ -19,7 +19,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from todoapp_project.todo.serializers import UserSerializer, GroupSerializer
+from todo.serializers import UserSerializer, GroupSerializer
 from .models import Tasks
 from .forms import AddTaskForm
 
