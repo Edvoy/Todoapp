@@ -19,7 +19,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from todo.serializers import UserSerializer, GroupSerializer
+from .serializers import UserSerializer, GroupSerializer
 from .models import Tasks
 from .forms import AddTaskForm
 
@@ -37,12 +37,11 @@ def index(request):
 
 
 def addTask(request):
-
+    print(request.POST)
     form = AddTaskForm(request.POST)
-
     if form.is_valid():
+        print("addtask is valid")
         form.save()
-
     return redirect('/')
 
 

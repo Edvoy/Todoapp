@@ -45,6 +45,7 @@
                                         {% csrf_token %}
                                         <div class="input-group mb-3 shadow bg-white">
                                             {{ updateForm.task }}
+                                            {{ updateForm.desc }}
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add Task</button>
                                             </div>
@@ -54,12 +55,15 @@
                                 {% else %}
                                     <form action="{% url 'ToDo:Add Task' %}" method="post">
                                         {% csrf_token %}
-                                        <div class="input-group mb-3 shadow bg-white">
+                                        <div class="input-group mb-2 shadow bg-white">
                                             {{ form.task }}
-                                            <div class="input-group-append">
+                                        </div>
+                                        <div class="input-group mb-2 shadow bg-white">
+                                            {{ form.desc }}
+                                        </div>
+                                        <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add Task</button>
                                             </div>
-                                        </div>
                                     </form>
                                 {% endif %}
 

@@ -18,10 +18,34 @@ class AddTaskForm(forms.ModelForm):
                             widget = forms.TextInput(
                                 attrs = {
                                     'class' : 'form-control',
-                                    'placeholder' : 'task?', 
+                                    'placeholder' : 'nouvelle tâche', 
                                 }
                             )
                         )
+    desc = forms.CharField(max_length = 550,
+                         widget = forms.TextInput(
+                             attrs = {
+                                 'class' : 'form-control',
+                                 'placeholder' : 'notes', 
+                             }
+                         ),
+                     )
+    # project = forms.CharField(max_length = 50,
+    #                     widget = forms.TextInput(
+    #                         attrs = {
+    #                             'class' : 'form-control',
+    #                             'placeholder' : 'projet', 
+    #                         }
+    #                     )
+    #                 )
+    # label = forms.CharField(max_length = 50,
+    #                     widget = forms.TextInput(
+    #                         attrs = {
+    #                             'class' : 'form-control',
+    #                             'placeholder' : 'label', 
+    #                         }
+    #                     )
+    #                 )
 
     class Meta:
         model = Tasks
