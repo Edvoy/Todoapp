@@ -22,7 +22,7 @@ LABEL_CHOICES = (
 class Tasks(models.Model):
     task = models.CharField(max_length=100)
     desc = models.CharField(max_length=500,default='')
-    # project = models.CharField(max_length=50,default='')
+    #project = models.CharField(max_length=50,default='')
     # completed = models.BooleanField(default=False)
     # due = models.DateField(default=datetime.date.today)
     # label = models.CharField(max_length=50,default='')

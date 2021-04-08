@@ -37,18 +37,17 @@ def index(request):
 
 
 def addTask(request):
-    print(request.POST)
+
     form = AddTaskForm(request.POST)
     if form.is_valid():
-        print("addtask is valid")
         form.save()
+
     return redirect('/')
 
 
 def deleteTask(request, id):
 
     task = Tasks.objects.get(pk = id)
-
     task.delete()
 
     return redirect('/')
@@ -57,7 +56,6 @@ def deleteTask(request, id):
 def completedTask(request, id):
 
     task = Tasks.objects.get(pk = id)
-
     task.completed = True
     task.save()
 
