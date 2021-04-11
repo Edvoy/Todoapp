@@ -14,6 +14,18 @@ from .models import Tasks
 
 class AddTaskForm(forms.ModelForm):
 
+    LOW = 'Low'
+    MEDIUM = 'Med'
+    HIGH = 'High'
+    NONE = ''
+    
+    LABEL_CHOICES = (
+        (LOW, "Low"),
+        (MEDIUM, "Medium"),
+        (HIGH, "High"),
+        (NONE, "priorité"),
+    )
+
     task = forms.CharField(max_length = 250,
                             widget = forms.TextInput(
                                 attrs = {
@@ -22,7 +34,8 @@ class AddTaskForm(forms.ModelForm):
                                 }
                             )
                         )
-    desc = forms.CharField(max_length = 550,
+    desc = forms.CharField(required = False,
+                        max_length = 550,
                          widget = forms.TextInput(
                              attrs = {
                                  'class' : 'form-control',
@@ -30,22 +43,28 @@ class AddTaskForm(forms.ModelForm):
                              }
                          ),
                      )
-    # project = forms.CharField(max_length = 50,
-    #                     widget = forms.TextInput(
-    #                         attrs = {
-    #                             'class' : 'form-control',
-    #                             'placeholder' : 'projet', 
-    #                         }
-    #                     )
-    #                 )
-    # label = forms.CharField(max_length = 50,
-    #                     widget = forms.TextInput(
-    #                         attrs = {
-    #                             'class' : 'form-control',
-    #                             'placeholder' : 'label', 
-    #                         }
-    #                     )
-    #                 )
+
+    label = forms.CharField(required = False,
+                        max_length = 50,
+                         widget = forms.TextInput(
+                            attrs = {
+                                'class' : 'form-control',
+                                'placeholder' : 'label', 
+                            }
+                        )
+                    )
+    
+    priority = forms.CharField(required = False,
+        widget=forms.Select(
+            choices = LABEL_CHOICES, 
+            attrs = {
+                'class' : 'form-control',
+                'placeholder' : 'priorité', 
+            }
+        )
+    )
+
+
 
     class Meta:
         model = Tasks

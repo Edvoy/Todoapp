@@ -27,7 +27,6 @@ def index(request):
 
     tasks = Tasks.objects.all()
     form = AddTaskForm()
-
     context = {
         'tasks' : tasks,
         'form' : form,
