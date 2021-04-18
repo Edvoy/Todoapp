@@ -43,12 +43,19 @@
                                 {% if updateForm %}
                                     <form action="{% url 'ToDo:Update Task' key %}" method="post">
                                         {% csrf_token %}
-                                        <div class="input-group mb-3 shadow bg-white">
-                                            {{ updateForm.task }}
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add Task</button>
+                                            <div class="input-group mb-2 shadow bg-white">
+                                                {{ updateForm.task }}
+                                            </div>   
+                                            <div class="input-group mb-2 shadow bg-white">
+                                                {{ updateForm.desc }}
                                             </div>
-                                        </div>
+                                            <div class="input-group mb-4 shadow bg-white">
+                                                {{ updateForm.label }}
+                                                {{ updateForm.priority }}
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Mettre à jour</button>
+                                                </div>
+                                            </div>
                                     </form>
 
                                 {% else %}
@@ -59,19 +66,15 @@
                                         </div>
                                         <div class="input-group mb-2 shadow bg-white">
                                             {{ form.desc }}
-                                            
                                         </div>
                                         <div class="input-group mb-4 shadow bg-white">
                                             {{ form.project }}
                                             {{ form.label }}
-                                            {{ form.due_date }}
                                             {{ form.priority }}
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Ajouter</button>
                                             </div>
                                         </div>
-                                       
-                                        
                                     </form>
                                 {% endif %}
 
@@ -107,9 +110,16 @@
                                                                 <body >{{ task.desc }}</body>
                                                         </div>
                                                         <div class="input-group-append">
-                                                                <body >{{ task.project }}</body>
-                                                                <body >{{ task.label }}</body>
-                                                                <body >{{ task.priority }}</body>
+                                                                <div class="badge badge-pill badge-primary">{{ task.label }}</div>
+                                                                {% if task.priority == "Low" %}
+                                                                    <div class="badge badge-pill badge-warning">{{ task.priority }}</div>
+                                                                {% elif task.priority == "Medium" %}
+                                                                    <div class="badge badge-pill badge-danger">{{ task.priority }}</div>
+                                                                {% elif task.priority == "High" %}
+                                                                    <div class="badge badge-pill badge-dark">{{ task.priority }}</div>
+                                                                {% else %}
+                                                                    <div class="badge badge-pill badge-secondary">{{ task.priority }}</div>
+                                                                {% endif %}
                                                         </div>
                                                     {% endif %}
 

@@ -15,7 +15,7 @@ from .models import Tasks
 class AddTaskForm(forms.ModelForm):
 
     LOW = 'Low'
-    MEDIUM = 'Med'
+    MEDIUM = 'Medium'
     HIGH = 'High'
     NONE = ''
     

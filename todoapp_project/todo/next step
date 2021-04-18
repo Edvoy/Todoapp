@@ -1,0 +1,26 @@
+- s'authentifier sur gmail grace à oauth
+- lister les emails avec q = "todo" (usersmessage.list)
+- recuperer id des emails (list id)
+- faire un get sur la liste des id récupérés
+- récupérer les payload
+- décoder data de MessagePartBody grace à base64url
+- puis :
+list:
+    [a,b,c] 
+
+filtrer:
+    [a,b,c]
+    a:                                      <= message valide
+        get
+        decoder
+        valider (priority, label, desc)
+        extraire (priority, label, desc)
+        inserer dans un objet model
+        sauvegarder le model
+        supprimer message
+    b:                                      <= message invalide
+        get
+        decoder
+        valide (priority, label, desc)
+        annuler
+    ...
