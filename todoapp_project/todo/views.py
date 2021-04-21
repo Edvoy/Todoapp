@@ -22,6 +22,7 @@ from rest_framework import permissions
 from .serializers import UserSerializer, GroupSerializer
 from .models import Tasks
 from .forms import AddTaskForm
+from .gmailAPI import payload2fields, main
 
 def index(request):
 
@@ -113,3 +114,5 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+#GMail API

@@ -14,32 +14,53 @@ from googleapiclient.http import MediaInMemoryUpload
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
-def payload2field(txt):
+def payload2fields(txt):
+    """Transform request GMail API to ready-to-use for todoapp.
+    """
     mimeType = txt['payload'].get('mimeType')
     data =''
 
     if mimeType == "text/plain":
-        data = txt['payload'].get('body')['data']
+        try:
+            data = txt['payload'].get('body')['data']
+        except KeyError:
+            print("Error in txt['payload'].get('body')['data'] line 23")
+            exit()
+
     elif mimeType == "multipart/alternative":
-        data = txt['payload'].get('parts')[0]['body']['data']
+        try:
+            data = txt['payload'].get('parts')[0]['body']['dataa']
+        except IndexError:
+            print("Error, list index out of range in get('parts')")
+            exit()
+
     else:
         print("bad mimeType, need text/plain or multipart/alternative")
         exit()
-    
-    subject = txt['payload'].get('headers')[6]['value']
+
+    try: 
+        subject = txt['payload'].get('headers')[6]['value']
+    except IndexError:
+            print("Error, list index out of range in get('headers')")
+            exit()
+
     task = subject[7:].strip()
-    
     decode = str(base64.urlsafe_b64decode(data))
     cleaned_decode = decode.strip("b'").split("\\r\\n")
     
     list = []
     for item in cleaned_decode:
         list += item.split(' : ')
-    priority = list[1]
-    label = list[3]
-    desc = list[5]
-    
-    return task, priority, label, desc
+
+    try:
+        priority = list[1]
+        label = list[3]
+        desc = list[5]
+        #effacer email
+
+        return task, priority, label, desc
+    except IndexError:
+        print("Error, list index out of range in priority, label, or desc")
 
 def main():
     """Shows basic usage of the Gmail API.
@@ -84,7 +105,7 @@ def main():
     for msg in messages:
 
             txt = service.users().messages().get(userId='me', id=msg['id']).execute()
-            task,priority,label,desc = payload2field(txt)
+            task,priority,label,desc = payload2fields(txt)
             print(f'tache : {task}, prio : {priority},label : {label}, note: {desc}')
 
 
