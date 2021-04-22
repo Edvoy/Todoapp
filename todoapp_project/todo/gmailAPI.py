@@ -15,7 +15,8 @@ from googleapiclient.http import MediaInMemoryUpload
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
 def payload2fields(txt):
-    """Transform request GMail API to ready-to-use for todoapp.
+    """
+    Transform request GMail API to ready-to-use for todoapp.
     """
     mimeType = txt['payload'].get('mimeType')
     data =''
@@ -24,12 +25,12 @@ def payload2fields(txt):
         try:
             data = txt['payload'].get('body')['data']
         except KeyError:
-            print("Error in txt['payload'].get('body')['data'] line 23")
+            print("Error in txt['payload'].get('body')['data']")
             exit()
 
     elif mimeType == "multipart/alternative":
         try:
-            data = txt['payload'].get('parts')[0]['body']['dataa']
+            data = txt['payload'].get('parts')[0]['body']['data']
         except IndexError:
             print("Error, list index out of range in get('parts')")
             exit()
@@ -38,29 +39,33 @@ def payload2fields(txt):
         print("bad mimeType, need text/plain or multipart/alternative")
         exit()
 
-    try: 
-        subject = txt['payload'].get('headers')[6]['value']
-    except IndexError:
-            print("Error, list index out of range in get('headers')")
-            exit()
+    #email subject searching
+    for n in range(len(txt['payload'].get('headers'))):
+        if txt['payload'].get('headers')[n]['name'] == 'Subject':
+            subject = txt['payload'].get('headers')[n]['value']
 
     task = subject[7:].strip()
     decode = str(base64.urlsafe_b64decode(data))
     cleaned_decode = decode.strip("b'").split("\\r\\n")
     
+    #decode unpack
     list = []
     for item in cleaned_decode:
         list += item.split(' : ')
 
-    try:
-        priority = list[1]
-        label = list[3]
-        desc = list[5]
-        #effacer email
+    priority = ""
+    label = ""
+    desc = ""
 
-        return task, priority, label, desc
-    except IndexError:
-        print("Error, list index out of range in priority, label, or desc")
+    for n in range(len(list)):
+        if list[n]=='Priority':
+            priority = list[n+1]
+        if list[n]=='Label':
+            label = list[n+1]
+        if list[n]=='Note':
+            desc = list[n+1]
+
+    return task, priority, label, desc
 
 def main():
     """Shows basic usage of the Gmail API.
@@ -106,7 +111,7 @@ def main():
 
             txt = service.users().messages().get(userId='me', id=msg['id']).execute()
             task,priority,label,desc = payload2fields(txt)
-            print(f'tache : {task}, prio : {priority},label : {label}, note: {desc}')
+            print(f'Tâche: {task}, Priorité: {priority}, Label: {label}, Note: {desc}')
 
 
 if __name__ == '__main__':

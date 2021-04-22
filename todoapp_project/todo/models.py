@@ -5,10 +5,10 @@ Il contient les champs et le comportement essentiels des données que vous stock
 Généralement, chaque modèle correspond à une seule table de base de données.
 https://docs.djangoproject.com/fr/3.1/topics/db/models/
 '''
-import datetime
 
 from django.utils import timezone
 from django.db import models
+
 
 
 class Tasks(models.Model):
