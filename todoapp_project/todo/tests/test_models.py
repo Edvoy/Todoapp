@@ -16,3 +16,5 @@ class TasksTestClass(TestCase):
         self.assertEqual(test.created_date, date(2018, 12, 19))
         self.assertEqual(test.label, "models_test")
         self.assertEqual(test.priority, "hight")
+
+        #add delete test

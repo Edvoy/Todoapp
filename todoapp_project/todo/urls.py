@@ -18,7 +18,7 @@ router.register(r'groups', views.GroupViewSet)
 
 app_name = 'ToDo'
 urlpatterns = [
-    path('', views.index, name="Home"),
+    path('', views.index, name="home"),
     path('addTask', views.addTask, name="Add Task"),
     path('deleteTask/<int:id>', views.deleteTask, name="Delete Task"),
     path('completedTask/<int:id>', views.completedTask, name="Task Completed"),

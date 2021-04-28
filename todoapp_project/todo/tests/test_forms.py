@@ -29,7 +29,7 @@ class AddTaskFormTest(TestCase):
         form = AddTaskForm(data=data)
         self.assertTrue(form.is_valid())
 
-    def test_valid_form(self):
+    def test_unvalid_form(self):
         data = {
             'task': "", 
             'desc': "", 

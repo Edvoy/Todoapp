@@ -112,7 +112,7 @@ def main():
             txt = service.users().messages().get(userId='me', id=msg['id']).execute()
             task,priority,label,desc = payload2fields(txt)
             print(f'Tâche: {task}, Priorité: {priority}, Label: {label}, Note: {desc}')
-
+            return task, priority,label, desc
 
 if __name__ == '__main__':
     main()
