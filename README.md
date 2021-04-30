@@ -4,10 +4,10 @@
 
 
 ## Index
-+ [Introduction](https://github.com/edvoy/eThings#introduction)
-+ [Usage](https://github.com/edvoy/eThings#Usage)
-+ [Architecture](https://github.com/edvoy/eThings#Architecture) 
-+ [Notes](https://github.com/edvoy/eThings#ANotes) 
++ [Introduction](https://github.com/edvoy/Todoapp#introduction)
++ [Usage](https://github.com/edvoy/Todoapp#Usage)
++ [Architecture](https://github.com/edvoy/Todoapp#Architecture) 
++ [Notes](https://github.com/edvoy/Todoapp#ANotes) 
 ## Introduction
 This my first django project. It was create after a proposal and challenging offer that a friend make to me.
 This project was an opportuniy to learn a lot of technologies :
