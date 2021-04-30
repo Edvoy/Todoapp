@@ -16,17 +16,14 @@ https://docs.djangoproject.com/fr/3.1/topics/http/views/
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import viewsets, permissions
 
 from .serializers import UserSerializer, GroupSerializer
 from .models import Tasks
 from .forms import AddTaskForm
-from .gmailAPI import payload2fields, main
+from .gmailAPI import getMail, deleteMail
 
 def index(request):
-
-#GMail API
 
     tasks = Tasks.objects.all()
     form = AddTaskForm()
@@ -34,7 +31,6 @@ def index(request):
         'tasks' : tasks,
         'form' : form,
     }
-
     return render(request, 'todo/index.html', context)
 
 
@@ -86,6 +82,9 @@ def updateTask(request, id):
 
 
 def deleteAllCompleted(request):
+    '''
+    delete your completed tasks in your app
+    '''
 
     completedTasks = Tasks.objects.filter(completed__exact=True).delete()
 
@@ -93,8 +92,30 @@ def deleteAllCompleted(request):
 
 
 def deleteAll(request):
+    '''
+    delete all added tasks
+    '''
 
     Tasks.objects.all().delete()
+
+    return redirect('/')
+
+def deleteMailTask(request):
+    '''
+    delete email in your mailbox
+    you can use it after addMailsTasks
+    '''
+    deleteMail()
+    
+    return redirect('/')
+
+def addMailsTasks(request):
+    '''
+    transform your mail task in task in your app
+    '''
+
+    task, priority,label, desc = getMail()
+    Tasks.objects.create(task = task, desc = desc, completed = False,  label = label, priority = priority)
 
     return redirect('/')
 
@@ -107,8 +128,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-
+    
 class GroupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.

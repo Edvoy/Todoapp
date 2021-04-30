@@ -63,9 +63,6 @@ class AddTaskForm(forms.ModelForm):
             }
         )
     )
-
-
-
     class Meta:
         model = Tasks
         fields = '__all__'

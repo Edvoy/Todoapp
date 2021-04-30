@@ -9,8 +9,6 @@ https://docs.djangoproject.com/fr/3.1/topics/db/models/
 from django.utils import timezone
 from django.db import models
 
-
-
 class Tasks(models.Model):
     task = models.CharField(max_length=100)
     desc = models.CharField(max_length=500,default='')

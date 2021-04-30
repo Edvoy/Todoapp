@@ -14,12 +14,12 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
-
-
 app_name = 'ToDo'
 urlpatterns = [
     path('', views.index, name="home"),
     path('addTask', views.addTask, name="Add Task"),
+    path('addMailsTasks', views.addMailsTasks, name="Sync Mail"),
+    path('delMailTasks', views.deleteMailTask, name="Del Mail"),
     path('deleteTask/<int:id>', views.deleteTask, name="Delete Task"),
     path('completedTask/<int:id>', views.completedTask, name="Task Completed"),
     path('updateTask/<int:id>', views.updateTask, name="Update Task"),
