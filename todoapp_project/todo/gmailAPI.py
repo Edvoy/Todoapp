@@ -114,10 +114,12 @@ def getMail():
     result = service.users().messages().list(maxResults=100, userId='me', q='subject:todo').execute()
     messages = result.get('messages')
 
-    #todo : gérer les messages vides
-    for msg in messages:
-            txt = service.users().messages().get(userId='me', id=msg['id']).execute()
-            task,priority,label,desc = payload2fields(txt)
+    if messages != None : 
+        for msg in messages:
+                txt = service.users().messages().get(userId='me', id=msg['id']).execute()
+                task,priority,label,desc = payload2fields(txt)
+    else :
+        task,priority,label,desc = "No TODO mail","","",""
 
     return task, priority,label, desc
 
