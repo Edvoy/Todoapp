@@ -84,6 +84,8 @@ Here is the tree you should have after installing the application
 ```
 
 ## Notes
-These last two months have been really intense, and rich in lessons learned.  Of course, I could go even further in the functionalities and technologies in this project, but the main thing is that today I feel able to create Django applications. That's the main thing! 
+These last two months have been really intense, and rich in lessons learned.  Of course, I could go even further in the functionalities and technologies in this project, but the main thing is that today I feel able to create Django applications. That's the main thing!
+
+PS : Thanks to this friend who pushed me to take this challenge
 
 ![alt text](https://imgshare.io/images/2021/04/30/thx.png)
